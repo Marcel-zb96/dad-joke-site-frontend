@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import mongoose from 'mongoose';
-import {Joke as JokeModel} from "./jokes.model.js";
+import {Joke as JokeModel} from "./db/jokes.model.js";
 
 const { MONGO_URL, PORT = 3000 } = process.env;
 
