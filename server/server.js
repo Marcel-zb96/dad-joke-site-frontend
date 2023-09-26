@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import mongoose from 'mongoose';
-import {Joke as JokeModel} from "./jokes.model.js";
+import {Joke as JokeModel} from "./db/jokes.model.js";
 
 const { MONGO_URL, PORT = 3000 } = process.env;
 
@@ -15,7 +15,22 @@ app.use(express.json());
 
 // Type endpoints after this line
 
+async function createJokeList(){
+    try {
+        const jokes = await JokeModel.find({});
+        console.log(jokes);
+        return jokes
+    } catch (error) {
+        console.log(err);
+    }
+}
 
+
+app.get('/api/jokes', async (req,res)=>{
+    console.log(req);
+    const jokeList = await createJokeList();
+    res.send(jokeList).status(200)
+})
 
 
 
@@ -26,7 +41,6 @@ const main = async () => {
 
   app.listen(PORT, () => {
     console.log("App is listening on 3000");
-    console.log("Try /api/employees route right now");
   });
 };
 
