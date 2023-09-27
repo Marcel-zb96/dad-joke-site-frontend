@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import mongoose from 'mongoose';
-import {Joke as JokeModel} from "./db/jokes.model.js";
+import { Joke as JokeModel } from "./db/jokes.model.js";
 
 const { MONGO_URL, PORT = 3000 } = process.env;
 
@@ -13,28 +13,27 @@ if (!MONGO_URL) {
 const app = express();
 app.use(express.json());
 
-// Type endpoints after this line
-
-async function createJokeList(){
-    try {
-        const jokes = await JokeModel.find({});
-        console.log(jokes);
-        return jokes
-    } catch (error) {
-        console.log(err);
-    }
-}
-
-
-app.get('/api/jokes', async (req,res)=>{
-    console.log(req);
-    const jokeList = await createJokeList();
-    res.send(jokeList).status(200)
+app.get('/api/jokes', async (req, res) => {
+  const type = req.query.type;
+  try {
+    const jokes = param === 'all' ?
+      await JokeModel.find() :
+      await JokeModel({ type });
+    res.send(jokes).status(200)
+  } catch (error) {
+    console.log(err);
+  }
 })
 
-
-
-// Type endpoints before this line
+app.get('/api/types', async (req, res) => {
+  try {
+    const jokes = await JokeModel.find();
+    const types = [...new Set(jokes.map((joke) => joke.type))];
+    res.send(types).status(200);
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 const main = async () => {
   await mongoose.connect(MONGO_URL);

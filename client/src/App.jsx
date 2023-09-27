@@ -3,29 +3,24 @@ import './App.css'
 
 
 function App() {
-
-  const [jokes, setJokes] = useState([])
+  
+  const [types, setTypes] = useState(null);
 
   useEffect(() => {
-    const fetchJokes = async () => {
-      const response = await fetch('/api/jokes');
+    async function fetchTypes() {
+      const response = await fetch('/api/types');
       const data = await response.json();
-      console.log(data);
-      setJokes(data)
-      if (response.status === 200) {
-        console.log("List is here");
-      }
+      setTypes(data);
     }
-    fetchJokes()
+    fetchTypes();
   }, [])
 
- console.log(jokes);
-
-
   return (
-    <div>
-      Main page
-    </div>
+    <>
+      <div>
+        
+      </div>
+    </>
   )
 }
 
