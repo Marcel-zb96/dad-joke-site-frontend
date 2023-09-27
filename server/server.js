@@ -14,12 +14,12 @@ const app = express();
 app.use(express.json());
 
 app.get('/api/jokes', async (req, res) => {
-  const type = req.query.type;
   try {
-    const jokes = param === 'all' ?
+    const type = req.query.type;
+    const jokes = type === '' ? 
       await JokeModel.find() :
-      await JokeModel({ type });
-    res.send(jokes).status(200)
+      await JokeModel.find({ type });
+      res.send(jokes).status(200)
   } catch (error) {
     console.log(err);
   }
@@ -33,7 +33,7 @@ app.get('/api/types', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-})
+});
 
 const main = async () => {
   await mongoose.connect(MONGO_URL);

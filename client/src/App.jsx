@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
+import { Link } from 'react-router-dom';
 
 
 function App() {
-  
+
   const [types, setTypes] = useState(null);
 
   useEffect(() => {
@@ -15,13 +16,22 @@ function App() {
     fetchTypes();
   }, [])
 
-  return (
-    <>
-      <div>
-        
-      </div>
-    </>
-  )
+  if (types) {
+    return (
+      <>
+        <div className='types'>
+          {types.map((type) => {
+            return (
+              <Link key={type} to={`/${encodeURIComponent(type)}`}><div className='type-box'>{type}</div></Link>
+            )
+          })}
+          <Link key={'all'} to={`/${encodeURIComponent('all')}`}><div className='type-box'>{'All'}</div></Link>
+        </div>
+      </>
+    )
+  }
+
+  return <div>Loading...</div>
 }
 
 export default App
