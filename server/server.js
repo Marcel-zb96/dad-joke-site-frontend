@@ -40,6 +40,16 @@ app.get('/api/jokes/:author', async (req, res) => {
   }
 });
 
+app.delete('/api/jokes/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await JokeModel.findOneAndDelete({ _id: id });
+    res.status(200).send('Delete successful');
+  } catch (err) {
+    res.status(333).send(console.error(err));
+  }
+});
+
 app.post('/api/jokes/new', (req, res) => {
     const setup = req.body.setup;
     const punchline = req.body.punchline;
