@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import User from "./User.jsx";
+
 import App from './App.jsx'
+import JokesByType from './JokesByType';
+
 
 
 const router = createBrowserRouter([
@@ -13,8 +15,24 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/user",
-    element: <User />,
+    path: "/general",
+    element: <JokesByType jokeType={'general'}/>,
+  },
+  {
+    path: "/all",
+    element: <JokesByType jokeType={''}/>,
+  },
+  {
+    path: "/dadjokes",
+    element: <JokesByType jokeType={'Dad Jokes'}/>,
+  },
+  {
+    path: "/knockknock",
+    element: <JokesByType jokeType={'knock-knock'}/>,
+  },
+  {
+    path: "/programming",
+    element: <JokesByType jokeType={'programming'}/>,
   }
 ]
 );
