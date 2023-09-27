@@ -40,12 +40,24 @@ app.get('/api/jokes/:author', async (req, res) => {
   }
 });
 
-app.post('/api/jokes/new', async (req, res) => {
-  try {
-    
-  } catch (err) {
-    res.status(777).send(console.error(err));
-  }
+app.post('/api/jokes/new', (req, res) => {
+    const setup = req.body.setup;
+    const punchline = req.body.punchline;
+    const type = req.body.type;
+    const author = req.body.author;
+    const likes = 0;
+    const created = Date.now();
+    const newJoke = new JokeModel ({
+      setup,
+      punchline,
+      type,
+      author,
+      likes,
+      created
+    });
+    newJoke.save()
+      .then((newJoke) => {res.status(200).send(newJoke)})
+      .catch((err) => {res.status(444).send(err)})
 });
 
 

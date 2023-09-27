@@ -8,21 +8,32 @@
 .newJokeInput {
   width: 80vw;
   height: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
 }
 
 .jokeBox {
   background-color: skyblue;
   border-color: midnightblue;
   border: 5px;
+  border-style: double;
   border-width: 5px;
   border-radius: 10px;
+  margin: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: larger;
 }
 
 .dropdown {
   width: 80vw;
   height: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
 }
 
 .button {
-  
+  width: fit-content;
+  height: fit-content;
+  align-self: center;
+  margin: 10px;
 }

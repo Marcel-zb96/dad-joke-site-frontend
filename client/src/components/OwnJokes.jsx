@@ -6,7 +6,7 @@ function OwnJokes(props) {
   const [jokeList, setJokeList] = useState([]);
   const [newSetup, setNewSetup] = useState('');
   const [newPunchline, setNewPunchline] = useState('');
-  const [newType, setNewType] = useState('');
+  const [newType, setNewType] = useState('General');
   const author = props.author;
 
   useEffect(() => {
@@ -23,10 +23,15 @@ function OwnJokes(props) {
   }
 
   function displayJoke(jokeObject) {
-    return <div key={jokeObject.id} className='jokeBox'>
-      <p>Setup: {jokeObject.setup}</p>
-      {jokeObject.punchline.length > 0 && <p>Punchline: {jokeObject.punchline}</p>}
+    return <div id={jokeObject.id} className='jokeBox'>
+      <h3>Setup: {jokeObject.setup}</h3>
+      {jokeObject.punchline.length > 0 && <h3>Punchline: {jokeObject.punchline}</h3>}
+      <button className='button' onClick={handleDelete}>DELETE</button>
     </div>
+  }
+
+  async function handleDelete() {
+
   }
 
   async function handleSubmit(event) {
@@ -36,8 +41,6 @@ function OwnJokes(props) {
       punchline: newPunchline,
       type: newType,
       author: author,
-      likes: 0,
-      created: Date.now
     }
     const response = await fetch('/api/jokes/new', {
       method: 'POST',
@@ -56,20 +59,19 @@ function OwnJokes(props) {
           <label>Punchline: </label>
           <input onChange={ event => setNewPunchline(event.target.value)} className='newJokeInput'></input>
           <label>Category: </label>
-          <select className='dropdown'>
-            <option selected disabled>Please choose one</option>
-            <option value='Dad Jokes'>Dad Jokes</option>
+          <select className='dropdown' onChange={event => setNewType(event.target.value)}>
             <option value='general'>General</option>
+            <option value='Dad Jokes'>Dad Jokes</option>
             <option value='programming'>Programming</option>
             <option value='knock-knock'>Knock-Knock</option>
           </select>
-          <button>Submit</button>
-          <button onClick={changeCreateStatus}>Back</button>
+          <button className='button'>SAVE</button>
+          <button className='button' onClick={changeCreateStatus}>Back</button>
         </form>
         :
         jokeList.length > 0 ?
           <>
-            <button onClick={changeCreateStatus}>ADD</button>
+            <button className='button' onClick={changeCreateStatus}>ADD</button>
             {jokeList.map((joke) => displayJoke(joke))}
           </>
           :
