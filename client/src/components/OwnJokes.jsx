@@ -3,19 +3,28 @@ import '../ownJokes.css';
 
 function OwnJokes(props) {
   const [isCreatingJoke, setIsCreatingJoke] = useState(false);
-  const testJoke = props.testJoke;
-  console.log(testJoke);
+  const [jokeList, setJokeList] = useState([]);
+  const author = props.author;
 
   function changeCreateStatus() {
     setIsCreatingJoke(!isCreatingJoke);
   }
 
   function displayJoke(jokeObject) {
-    return <>
+    return <div className='jokeBox'>
       <p>Setup: {jokeObject.setup}</p>
-      <p>Punchline: {jokeObject.punchline}</p>
-    </>
+      {jokeObject.punchline.length > 0 && <p>Punchline: {jokeObject.punchline}</p>}
+    </div>
   }
+
+  useEffect(() => {
+    async function fetchJokesByAuthor(author) {
+      const response = await fetch(`/api/jokes/${author}`);
+      const data = await response.json();
+      setJokeList(data);
+    }
+    fetchJokesByAuthor(author);
+  }, [])
 
   return (
     <>
@@ -29,10 +38,13 @@ function OwnJokes(props) {
           <button onClick={changeCreateStatus}>Back</button>
         </form>
         :
-        <>
-          <button onClick={changeCreateStatus}>ADD</button>
-          {displayJoke(testJoke)}
-        </>
+        jokeList.length > 0 ?
+          <>
+            <button onClick={changeCreateStatus}>ADD</button>
+            {jokeList.map((joke) => displayJoke(joke))}
+          </>
+          :
+          <p>Loading...</p>
       }
     </>
   )

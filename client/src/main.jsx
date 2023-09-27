@@ -19,13 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/ownJokes",
-    element: <OwnJokes testJoke={{
-      "setup": "Dad, can you put my shoes on?",
-      "punchline": "I don't think they'll fit me.",
-      "type": "general",
-      "author": "unknown",
-      "likes": 0
-    }} />,
+    element: <OwnJokes author={'unknown'} />,
   }
 ]
 );
