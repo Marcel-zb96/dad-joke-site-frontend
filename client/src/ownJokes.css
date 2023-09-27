@@ -1,0 +1,11 @@
+.newJokeForm {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: larger;
+}
+
+.newJokeInput {
+  width: 80vw;
+  height: 30px;
+}
