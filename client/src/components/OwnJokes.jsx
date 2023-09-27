@@ -23,15 +23,19 @@ function OwnJokes(props) {
   }
 
   function displayJoke(jokeObject) {
-    return <div id={jokeObject.id} className='jokeBox'>
+    return <div id={jokeObject._id} className='jokeBox'>
       <h3>Setup: {jokeObject.setup}</h3>
       {jokeObject.punchline.length > 0 && <h3>Punchline: {jokeObject.punchline}</h3>}
       <button className='button' onClick={handleDelete}>DELETE</button>
     </div>
   }
 
-  async function handleDelete() {
-
+  async function handleDelete(event) {
+    const id = event.target.parentElement.id;
+    await fetch(`/api/jokes/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   async function handleSubmit(event) {
@@ -55,9 +59,9 @@ function OwnJokes(props) {
       {isCreatingJoke ?
         <form onSubmit={handleSubmit} className='newJokeForm'>
           <label>Setup: </label>
-          <input onChange={ event => setNewSetup(event.target.value)} className='newJokeInput'></input>
+          <input onChange={event => setNewSetup(event.target.value)} className='newJokeInput'></input>
           <label>Punchline: </label>
-          <input onChange={ event => setNewPunchline(event.target.value)} className='newJokeInput'></input>
+          <input onChange={event => setNewPunchline(event.target.value)} className='newJokeInput'></input>
           <label>Category: </label>
           <select className='dropdown' onChange={event => setNewType(event.target.value)}>
             <option value='general'>General</option>
