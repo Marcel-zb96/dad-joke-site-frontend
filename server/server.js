@@ -36,7 +36,15 @@ app.get('/api/jokes/:author', async (req, res) => {
     const data = await JokeModel.find({ author: author });
     res.send(data);
   } catch (err) {
-    res.status(555).send('Nagy baj van');
+    res.status(555).send(console.error(err));
+  }
+});
+
+app.post('/api/jokes/new', async (req, res) => {
+  try {
+    
+  } catch (err) {
+    res.status(777).send(console.error(err));
   }
 });
 
