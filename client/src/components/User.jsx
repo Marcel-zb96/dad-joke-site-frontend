@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function User() {
 
@@ -44,6 +45,7 @@ function User() {
 
   return (
     <>
+      <Link to='/'><button>HOME</button></Link>
       <h2>User data</h2>
       <h2>{updateUser}</h2>
       <form >
