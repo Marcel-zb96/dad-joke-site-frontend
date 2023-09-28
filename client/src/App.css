@@ -64,3 +64,12 @@
   justify-content: center;
   align-items: center;
 }
+
+.blured-pline{
+  filter: blur(5px);
+}
+
+.login-request{
+  font-style: italic;
+  opacity: 0.5;
+}
