@@ -23,7 +23,7 @@ function OwnJokes(props) {
   }
 
   function displayJoke(jokeObject) {
-    return <div id={jokeObject._id} className='jokeBox'>
+    return <div id={jokeObject._id} key={jokeObject._id} className='jokeBox'>
       <h3>Setup: {jokeObject.setup}</h3>
       {jokeObject.punchline.length > 0 && <h3>Punchline: {jokeObject.punchline}</h3>}
       <button className='button' onClick={handleDelete}>DELETE</button>
