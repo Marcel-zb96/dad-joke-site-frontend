@@ -14,32 +14,6 @@ if (!MONGO_URL) {
 const app = express();
 app.use(express.json());
 
-// Type endpoints after this line
-
-async function createJokeList() {
-  try {
-    const jokes = await JokeModel.find({});
-    return jokes
-  } catch (error) {
-    console.log(err);
-  }
-}
-
-async function createJokeListByType(jokeType) {
-    try {
-        const jokes = await JokeModel.find({ type: jokeType });
-        console.log(jokes);
-        return jokes
-    } catch (error) {
-        console.log(err);
-    }
-}
-
-app.get('/api/jokes', async (req, res) => {
-  const jokeList = await createJokeList();
-  res.send(jokeList).status(200)
-})
-
 app.get('/api/jokes/:author', async (req, res) => {
   const author = req.params.author;
   try {
@@ -79,18 +53,17 @@ app.post('/api/jokes/new', (req, res) => {
       .then((newJoke) => {res.status(200).send(newJoke)})
       .catch((err) => {res.status(444).send(err)})
 });
-app.get('/api/jokes/:type', async (req, res) => {
-    console.log(req.params.type);
-    const jokeType = req.params.type
-    const jokeList = await createJokeListByType(jokeType);
-    res.send(jokeList).status(200)
-})
-
 
 app.get('/api/jokes', async (req, res) => {
-    console.log(req);
-    const jokeList = await createJokeList();
-    res.send(jokeList).status(200)
+  try {
+    const type = req.query.type;
+    const jokes = type === '' ? 
+      await JokeModel.find() :
+      await JokeModel.find({ type });
+      res.send(jokes).status(200)
+  } catch (error) {
+    console.log(err);
+  }
 })
 
 //user endpoint
@@ -113,9 +86,15 @@ app.post('/api/user', async (req, res) => {
     res.json({success: false})
   }
 });
-
-
-// Type endpoints before this line
+app.get('/api/types', async (req, res) => {
+  try {
+    const jokes = await JokeModel.find();
+    const types = [...new Set(jokes.map((joke) => joke.type))];
+    res.send(types).status(200);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const main = async () => {
     await mongoose.connect(MONGO_URL);
