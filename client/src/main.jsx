@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-
-import App from './App.jsx'
+import User from "./components/User.jsx";
+import App from './App.jsx';
+import OwnJokes from './components/OwnJokes.jsx';
 import JokesByType from './JokesByType';
 import Header from './components/Header';
 import User from './components/User';
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <User />
+      },
+      {
+        path: "/ownJokes",
+        element: <OwnJokes author={'unknown'} />
       },
       {
         path: "/home",

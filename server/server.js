@@ -14,6 +14,46 @@ if (!MONGO_URL) {
 const app = express();
 app.use(express.json());
 
+app.get('/api/jokes/:author', async (req, res) => {
+  const author = req.params.author;
+  try {
+    const data = await JokeModel.find({ author: author });
+    res.send(data);
+  } catch (err) {
+    res.status(555).send(console.error(err));
+  }
+});
+
+app.delete('/api/jokes/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await JokeModel.findOneAndDelete({ _id: id });
+    res.status(200).send('Delete successful');
+  } catch (err) {
+    res.status(333).send(console.error(err));
+  }
+});
+
+app.post('/api/jokes/new', (req, res) => {
+    const setup = req.body.setup;
+    const punchline = req.body.punchline;
+    const type = req.body.type;
+    const author = req.body.author;
+    const likes = 0;
+    const created = Date.now();
+    const newJoke = new JokeModel ({
+      setup,
+      punchline,
+      type,
+      author,
+      likes,
+      created
+    });
+    newJoke.save()
+      .then((newJoke) => {res.status(200).send(newJoke)})
+      .catch((err) => {res.status(444).send(err)})
+});
+
 app.get('/api/jokes', async (req, res) => {
   try {
     const type = req.query.type;
