@@ -39,16 +39,13 @@ function Login() {
       email: email
     };
     const response = await sendRequest('/api/user', payload, 'POST')
-    console.log(response);
     setValidation(response.success);
   }
 
   async function handleLogin() {
     const response = await fetchData(`/api/user/${name}/${email}`);
-    console.log(response);
+    localStorage.setItem('user', `${name}`);
     setValidation(response.success);
-    // move to HOME page
-
   }
   
 
