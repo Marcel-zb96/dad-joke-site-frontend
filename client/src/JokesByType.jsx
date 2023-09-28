@@ -11,18 +11,11 @@ const [jokes, setJokes] = useState([])
       const fetchJokes = async () => {
         const response = await fetch(`/api/jokes/${jokeType}`);
         const data = await response.json();
-        console.log(data);
         setJokes(data)
-        if (response.status === 200) {
-          console.log("List is here");
-        }
       }
       fetchJokes()
     }, [])
   
-    console.log(jokes);
-
-
     return (
         <>
             <nav>

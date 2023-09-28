@@ -50,6 +50,20 @@ app.get('/api/jokes', async (req, res) => {
 })
 
 
+app.patch('/api/jokes/:id', async (req, res, next) => {
+    try {
+        const joke = await JokeModel.findById(req.params.id);
+        joke.likes = req.body.likes;
+        console.log(joke);
+        await joke.save();
+        res.send(joke).status(200)
+    } catch (error) {
+        next(error);
+    }
+})
+
+
+
 
 // Type endpoints before this line
 

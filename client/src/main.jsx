@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from './App.jsx'
 import JokesByType from './JokesByType';
-
+import User from './components/User';
 
 
 const router = createBrowserRouter([
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/programming",
     element: <JokesByType jokeType={'programming'}/>,
+  },
+  {
+    path: "/user",
+    element: <User />,
   }
 ]
 );
