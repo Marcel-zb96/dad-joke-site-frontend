@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/ownJokes",
-        element: <OwnJokes author={'unknown'} />
+        element: <OwnJokes author={localStorage.getItem('user')} />
       },
       {
         path: "/home",

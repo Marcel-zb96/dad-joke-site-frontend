@@ -1,6 +1,7 @@
 import { useState } from "react"
 import './OneJoke.css'
 import User from "./components/User";
+import { Link } from "react-router-dom";
 
 export default function Joke({ joke }) {
 
@@ -36,7 +37,14 @@ export default function Joke({ joke }) {
         <>
             <div className="oneJoke">
                 <h2>{joke.setup}</h2>
-                {localStorage.getItem("user") ? <h3 style={{ color: 'red' }}>{joke.punchline}</h3> : <h3>Funny content</h3>}
+                {localStorage.getItem("user")
+                    ? <h3 style={{ color: 'red' }}>{joke.punchline}</h3>
+                    : <>
+                        <h3 className="blured-pline">Really funny punchline</h3>
+                        <div className="login-request">
+                            <Link to="/login">Log in to see content</Link>
+                        </div>
+                    </>}
                 <button className="likeBtn" onClick={() =>
                     handleLike()} style={{ color: "green", display: "flex" }}>
                     Like: {likesNum}</button>

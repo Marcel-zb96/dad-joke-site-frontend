@@ -81,7 +81,8 @@ function OwnJokes({ author }) {
             {jokeList.map((joke) => displayJoke(joke))}
           </>
           :
-          <p>Loading...</p>
+          <p><button className='button' onClick={changeCreateStatus}>ADD</button>
+          <div>No jokes yet</div></p>
       }
     </>
   )
