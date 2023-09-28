@@ -67,6 +67,23 @@ app.get('/api/jokes', async (req, res) => {
 })
 
 //user endpoint
+
+app.get('/api/user/:name/:email', async (req, res) => {
+  const name = req.params.name;
+  const email = req.params.email;
+  console.log(name, email);
+  try {
+    const user = await User.findOne({name: name, email: email});
+    console.log(user);
+    if (user) {
+      res.json({success: 'You are logged in'});
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({success: 'User not extist, please register'});
+  }
+});
+
 app.post('/api/user', async (req, res) => {
 
   const name = req.body.name;
@@ -78,12 +95,13 @@ app.post('/api/user', async (req, res) => {
     email,
     createdAt
   });
+  
   try {
     await user.save();
-    res.status(201).json({success: true});
+    res.status(201).json({success: 'User created'});
   } catch (error) {
     console.error(error);
-    res.json({success: false})
+    res.json({success: 'Email or username already exists'})
   }
 });
 app.get('/api/types', async (req, res) => {
