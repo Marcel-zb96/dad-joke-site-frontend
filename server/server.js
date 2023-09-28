@@ -68,6 +68,16 @@ app.get('/api/jokes', async (req, res) => {
 })
 
 //user endpoint
+app.get('/api/user/:name', async (req, res) => {
+  const name = req.params.name;
+  try {
+    const user = await User.findOne({name: name});
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    res.send('error');
+  }
+});
 
 app.get('/api/user/:name/:email', async (req, res) => {
   const name = req.params.name;
@@ -107,19 +117,18 @@ app.post('/api/user', async (req, res) => {
 });
 
 app.patch('/api/user', async (req, res) => {
+  const targetName = req.body.targetName;
   const name = req.body.name;
   const email = req.body.email;
-
-  const user = new User({
-    name,
-    email
-  });
   try {
-    await user.save();
-    res.status(201).json({success: 'User data has been chaned!'});
+    const targetUser = await User.findOne({name: targetName});
+    targetUser.name = name;
+    targetUser.email = email;
+    targetUser.save();
+    res.status(201).json({success: 'User data has been changed!'});
   } catch (error) {
     console.error(error);
-    res.json({success: 'Process faild!'})
+    res.json({success: 'Process failed!'})
   }
 });
 
