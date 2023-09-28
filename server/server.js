@@ -105,6 +105,24 @@ app.post('/api/user', async (req, res) => {
     res.json({success: 'Email or username already exists'})
   }
 });
+
+app.patch('/api/user', async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+
+  const user = new User({
+    name,
+    email
+  });
+  try {
+    await user.save();
+    res.status(201).json({success: 'User data has been chaned!'});
+  } catch (error) {
+    console.error(error);
+    res.json({success: 'Process faild!'})
+  }
+});
+
 app.get('/api/types', async (req, res) => {
   try {
     const jokes = await JokeModel.find();
