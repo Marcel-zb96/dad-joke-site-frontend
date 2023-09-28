@@ -10,32 +10,38 @@
 }
 
 .home-button {
-  height: auto;
+  height: 100%;
+  width: 100%;
   grid-area: a;
 }
 
 .random-joke-button {
-  height: auto;
+  height: 100%;
+  width: 100%;
   grid-area: f;
 }
 
 .login-button {
-  height: 75px;
+  height: 100%;
+  width: 100%;
   grid-area: j;
 }
 
 .logout-button {
-  height: auto;
+  height: 100%;
+  width: 100%;
   flex: auto;
 }
 
 .myjokes-button {
-  height: auto;
+  height: 100%;
+  width: 100%;
   flex: auto;
 }
 
 .profile {
-  height: auto;
+  height: 100%;
+  width: 100%;
   flex: auto;
 }
 

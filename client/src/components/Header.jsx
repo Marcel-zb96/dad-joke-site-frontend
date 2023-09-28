@@ -14,19 +14,19 @@ export default function Header() {
   return (
     <>
       <div className='header-box'>
-        <button className='home-button'><Link to="/home">Home</Link></button>
-        <button className='random-joke-button'><Link to="/random">Random Joke</Link></button>
+        <Link className='home-button' to="/home"><button className='home-button' >Home</button></Link>
+        <Link className='random-joke-button' to="/random"><button className='random-joke-button'>Random Joke</button></Link>
         {!user
-          ? <button className='login-button'><Link to="/home">Log In</Link></button>
+          ? <Link to="/login" className='login-button'><button className='login-button'>Log In</button></Link>
           : (
             <div className='user-buttons'>
-              <button className='myjokes-button'><Link to="/ownJokes">My okes</Link></button>
-              <button className='profile'><Link to="/ownJokes">Profile</Link></button>
-              <button className='logout-button' onClick={handleLogOut}><Link to="/home">Log Out</Link></button>
+              <Link className='myjokes-button' to="/ownJokes"><button className='myjokes-button'>My jokes</button></Link>
+              <Link className='profile' to="/ownJokes"><button className='profile'>Profile</button></Link>
+              <Link className='logout-button' to="/home"><button className='logout-button' onClick={handleLogOut}>Log Out</button></Link>
             </div>
-            )
+          )
         }
-      </div>
+      </div >
       <Outlet />
     </>
   )
