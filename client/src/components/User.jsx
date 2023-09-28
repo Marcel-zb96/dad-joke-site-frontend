@@ -38,7 +38,7 @@ function User() {
       email: email
     };
     setHidden(!hidden);
-    const response = await sendRequest('/api/user', payload, 'POST')
+    const response = await sendRequest('/api/user', payload, 'PATCH')
     console.log(response);
     setUpdateUser(response.success);
   }

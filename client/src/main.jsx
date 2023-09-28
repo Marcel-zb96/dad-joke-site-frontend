@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import User from "./components/User.jsx";
 import App from './App.jsx';
 import OwnJokes from './components/OwnJokes.jsx';
 import JokesByType from './JokesByType';
 import Header from './components/Header';
-
+import Login from './components/Login';
+import User from './components/User';
+import RandomJoke from './RandomJoke';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
       {
         path: "/programming",
         element: <JokesByType jokeType={'programming'} />,
+      }, 
+      {
+        path: "/login",
+        element: <Login/>
+      },
+      {
+        path: "/random",
+        element: <RandomJoke />
       }
     ]
   }]

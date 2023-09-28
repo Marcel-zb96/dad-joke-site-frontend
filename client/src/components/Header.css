@@ -1,6 +1,43 @@
-.header-box{
+.header-box {
   height: 100px;
   margin-bottom: 50px;
   width: 100vw;
-  text-align: center;
+  background-color: rgb(83, 83, 83);
+  padding-top: 25px;
+  display: grid;
+  grid-template-areas: "a b c d f g h i j";
+}
+
+.home-button {
+  height: 75px;
+  grid-area: a;
+}
+
+.random-joke-button {
+  height: 75px;
+  grid-area: f;
+}
+
+.login-button {
+  height: 75px;
+  grid-area: j;
+}
+
+.logout-button {
+  height: 75px;
+
+}
+
+.myjokes-button {
+  height: 75px;
+
+}
+
+.profile {
+  height: 75px;
+
+}
+
+.user-buttons {
+  grid-area: h / i / j;
 }
