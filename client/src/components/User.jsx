@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
-function User() {
-
-  const userData = {name: 'Huxley', email: 'huxley@gmail.com'};
+function User({userName}) {
+  console.log(userName);
   async function sendRequest(url, payload, method) {
     try {
       const response = await fetch(url, {
@@ -22,11 +21,31 @@ function User() {
 
   const [readOnly, setReadOnly] = useState(true);
   const [hidden, setHidden] = useState(true);
-  const [name, setName] = useState(userData.name);
-  const [email, setEmail] = useState(userData.email);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [updateUser, setUpdateUser] = useState({success: ''});
 
-  function handleEdit() {
+  useEffect(() => {
+    async function fetchData(userName) {
+      try {
+        const response = await fetch(`/api/user/${userName}`);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    async function getUser(userName) {
+      const user = await fetchData(userName);
+      setName(user.name);
+      setEmail(user.email);
+    }
+
+    getUser(userName);
+  }, []);
+
+  async function handleEdit() {
     setReadOnly(!readOnly);
     setHidden(!hidden);
   }
@@ -34,20 +53,20 @@ function User() {
   async function handleSave() {
     setReadOnly(!readOnly);
     const payload = {
+      targetName: userName,
       name: name,
       email: email
     };
     setHidden(!hidden);
-    const response = await sendRequest('/api/user', payload, 'PATCH')
+    const response = await sendRequest('/api/user', payload, 'PATCH');
     console.log(response);
-    setUpdateUser(response.success);
+    setUpdateUser(response);
   }
 
   return (
     <>
-    <Link to='/'><button>HOME</button></Link>
       <h2>User data</h2>
-      <h2>{updateUser}</h2>
+      <h2>{updateUser.success}</h2>
       <form >
         <div>
         <label>name: </label>

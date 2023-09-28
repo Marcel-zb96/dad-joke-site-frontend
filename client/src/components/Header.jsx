@@ -3,7 +3,6 @@ import "./Header.css"
 
 export default function Header() {
   const location = useLocation();
-  console.log(location)
 
   const user = localStorage.getItem("user");
 
@@ -21,7 +20,7 @@ export default function Header() {
           : (
             <div className='user-buttons'>
               <Link className='myjokes-button' to="/ownJokes"><button className='myjokes-button'>My jokes</button></Link>
-              <Link className='profile' to="/ownJokes"><button className='profile'>Profile</button></Link>
+              <Link className='profile' to="/profile"><button className='profile'>Profile</button></Link>
               <Link className='logout-button' to="/home"><button className='logout-button' onClick={handleLogOut}>Log Out</button></Link>
             </div>
           )

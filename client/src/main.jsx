@@ -59,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/random",
         element: <RandomJoke />
+      },
+      {
+        path: "/profile",
+        element: <User userName={localStorage.getItem('user')}/>
       }
     ]
   }]
