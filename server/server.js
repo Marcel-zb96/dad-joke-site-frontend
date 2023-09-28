@@ -17,13 +17,12 @@ app.use(express.json());
 // Type endpoints after this line
 
 async function createJokeList() {
-    try {
-        const jokes = await JokeModel.find({});
-        console.log(jokes);
-        return jokes
-    } catch (error) {
-        console.log(err);
-    }
+  try {
+    const jokes = await JokeModel.find({});
+    return jokes
+  } catch (error) {
+    console.log(err);
+  }
 }
 
 async function createJokeListByType(jokeType) {
@@ -36,6 +35,50 @@ async function createJokeListByType(jokeType) {
     }
 }
 
+app.get('/api/jokes', async (req, res) => {
+  const jokeList = await createJokeList();
+  res.send(jokeList).status(200)
+})
+
+app.get('/api/jokes/:author', async (req, res) => {
+  const author = req.params.author;
+  try {
+    const data = await JokeModel.find({ author: author });
+    res.send(data);
+  } catch (err) {
+    res.status(555).send(console.error(err));
+  }
+});
+
+app.delete('/api/jokes/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await JokeModel.findOneAndDelete({ _id: id });
+    res.status(200).send('Delete successful');
+  } catch (err) {
+    res.status(333).send(console.error(err));
+  }
+});
+
+app.post('/api/jokes/new', (req, res) => {
+    const setup = req.body.setup;
+    const punchline = req.body.punchline;
+    const type = req.body.type;
+    const author = req.body.author;
+    const likes = 0;
+    const created = Date.now();
+    const newJoke = new JokeModel ({
+      setup,
+      punchline,
+      type,
+      author,
+      likes,
+      created
+    });
+    newJoke.save()
+      .then((newJoke) => {res.status(200).send(newJoke)})
+      .catch((err) => {res.status(444).send(err)})
+});
 app.get('/api/jokes/:type', async (req, res) => {
     console.log(req.params.type);
     const jokeType = req.params.type
