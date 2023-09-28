@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function User() {
 
@@ -23,7 +24,7 @@ function User() {
   const [hidden, setHidden] = useState(true);
   const [name, setName] = useState(userData.name);
   const [email, setEmail] = useState(userData.email);
-  const [updateUser, setUpdateUser] = useState(null);
+  const [updateUser, setUpdateUser] = useState({success: ''});
 
   function handleEdit() {
     setReadOnly(!readOnly);
@@ -39,11 +40,12 @@ function User() {
     setHidden(!hidden);
     const response = await sendRequest('/api/user', payload, 'POST')
     console.log(response);
-    setUpdateUser('Success');
+    setUpdateUser(response.success);
   }
 
   return (
     <>
+    <Link to='/'><button>HOME</button></Link>
       <h2>User data</h2>
       <h2>{updateUser}</h2>
       <form >

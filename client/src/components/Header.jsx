@@ -5,7 +5,11 @@ export default function Header() {
   const location = useLocation();
   console.log(location)
 
-  const user = localStorage.getItem("user")
+  const user = localStorage.getItem("user");
+
+  function handleClick() {
+    localStorage.clear()
+  }
 
   return (
     <>
@@ -13,10 +17,8 @@ export default function Header() {
       <button><Link to="/">Home</Link></button>
       <button><Link to="/">Random Joke</Link></button>
       {!user ? 
-      <button><Link to="/">Log In</Link></button> :
-      
-      <button><Link to="/">Log Out</Link></button>}
-      
+      <button><Link to="/home">Log In</Link></button> :
+      <button onClick={handleClick}><Link to="/home">{user}</Link></button>}
     </div>
     <Outlet/>
     </>

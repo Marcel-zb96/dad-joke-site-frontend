@@ -1,13 +1,14 @@
 import 'dotenv/config';
 import express from "express";
 import mongoose from 'mongoose';
-import { Joke as JokeModel } from "./db/jokes.model.js";
+import {Joke as JokeModel} from "./db/jokes.model.js";
+import User from './db/userData.js';
 
 const { MONGO_URL, PORT = 3000 } = process.env;
 
 if (!MONGO_URL) {
-  console.error("Missing MONGO_URL environment variable");
-  process.exit(1);
+    console.error("Missing MONGO_URL environment variable");
+    process.exit(1);
 }
 
 const app = express();
@@ -25,6 +26,26 @@ app.get('/api/jokes', async (req, res) => {
   }
 })
 
+//user endpoint
+app.post('/api/user', async (req, res) => {
+
+  const name = req.body.name;
+  const email = req.body.email;
+  const createdAt = Date.now();
+
+  const user = new User({
+    name,
+    email,
+    createdAt
+  });
+  try {
+    await user.save();
+    res.status(201).json({success: true});
+  } catch (error) {
+    console.error(error);
+    res.json({success: false})
+  }
+});
 app.get('/api/types', async (req, res) => {
   try {
     const jokes = await JokeModel.find();
@@ -36,14 +57,14 @@ app.get('/api/types', async (req, res) => {
 });
 
 const main = async () => {
-  await mongoose.connect(MONGO_URL);
+    await mongoose.connect(MONGO_URL);
 
-  app.listen(PORT, () => {
-    console.log("App is listening on 3000");
-  });
+    app.listen(PORT, () => {
+        console.log("App is listening on 3000");
+    });
 };
 
 main().catch((err) => {
-  console.error(err);
-  process.exit(1);
+    console.error(err);
+    process.exit(1);
 });
