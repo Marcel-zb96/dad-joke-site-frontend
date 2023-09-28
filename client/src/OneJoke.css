@@ -1,9 +1,35 @@
 .oneJoke{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    padding: 2px 16px;
+    padding: 2px 3px;
+    height: 280px;
+    width: 700px;
+    display: inline-block;
+    position: relative;
 }
 
 .oneJoke:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.jokeAuthor {
+  width: auto;
+  left: 10px;
+  bottom: 5px;
+  position: absolute;
+}
+
+.likeBtn{
+  width: auto;
+  left: 28%;
+  bottom: 50px;
+  position: absolute;
+ 
+}
+
+.disLikeBtn{
+  width: auto;
+  left: 60%;
+  bottom: 50px;
+  position: absolute;
 }
