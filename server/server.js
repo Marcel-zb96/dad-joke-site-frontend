@@ -25,6 +25,19 @@ app.get('/api/jokes/:author', async (req, res) => {
   }
 });
 
+app.patch('/api/jokes/:id', async (req, res, next) => {
+  try {
+      const joke = await JokeModel.findById(req.params.id);
+      joke.likes = req.body.likes;
+      console.log(joke);
+      await joke.save();
+      res.send(joke).status(200)
+  } catch (error) {
+      next(error);
+  }
+})
+
+
 app.delete('/api/jokes/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -159,6 +172,9 @@ const main = async () => {
     console.log("App is listening on 3000");
   });
 };
+
+
+
 
 main().catch((err) => {
   console.error(err);

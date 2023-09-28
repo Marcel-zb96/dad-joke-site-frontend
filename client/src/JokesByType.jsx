@@ -17,11 +17,6 @@ export default function JokesByType({ jokeType }) {
 
     return (
         <>
-            <nav>
-                    <button><Link to="/">Home</Link></button>
-                    <button><Link to="/user">Profile</Link></button>
-                    <button>Sort jokes</button>
-            </nav>
             <ul>
                 {jokes.map((joke) => <Joke joke={joke} />)}
             </ul>

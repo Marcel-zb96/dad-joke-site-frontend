@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import '../ownJokes.css';
 
-function OwnJokes(props) {
+function OwnJokes({ author }) {
   const [isCreatingJoke, setIsCreatingJoke] = useState(false);
   const [jokeList, setJokeList] = useState([]);
   const [newSetup, setNewSetup] = useState('');
   const [newPunchline, setNewPunchline] = useState('');
   const [newType, setNewType] = useState('General');
-  const author = props.author;
 
   useEffect(() => {
-    async function fetchJokesByAuthor(author) {
-      const response = await fetch(`/api/jokes/${author}`);
-      const data = await response.json();
-      setJokeList(data);
-    }
     fetchJokesByAuthor(author);
-  }, [])
+  }, [isCreatingJoke])
+
+  async function fetchJokesByAuthor(author) {
+    const response = await fetch(`/api/jokes/${author}`);
+    const data = await response.json();
+    setJokeList(data);
+  }
 
   function changeCreateStatus() {
     setIsCreatingJoke(!isCreatingJoke);
@@ -36,6 +36,7 @@ function OwnJokes(props) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     });
+    fetchJokesByAuthor(author);
   }
 
   async function handleSubmit(event) {
@@ -51,6 +52,7 @@ function OwnJokes(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newJoke)
     });
+    changeCreateStatus();
     return response.json()
   }
 
@@ -79,7 +81,8 @@ function OwnJokes(props) {
             {jokeList.map((joke) => displayJoke(joke))}
           </>
           :
-          <p>Loading...</p>
+          <p><button className='button' onClick={changeCreateStatus}>ADD</button>
+          <div>No jokes yet</div></p>
       }
     </>
   )
