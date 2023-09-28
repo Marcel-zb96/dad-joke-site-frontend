@@ -3,18 +3,19 @@
   margin-bottom: 50px;
   width: 100vw;
   background-color: rgb(83, 83, 83);
-  padding-top: 25px;
+
   display: grid;
   grid-template-areas: "a b c d f g h i j";
+
 }
 
 .home-button {
-  height: 75px;
+  height: auto;
   grid-area: a;
 }
 
 .random-joke-button {
-  height: 75px;
+  height: auto;
   grid-area: f;
 }
 
@@ -24,20 +25,23 @@
 }
 
 .logout-button {
-  height: 75px;
-
+  height: auto;
+  flex: auto;
 }
 
 .myjokes-button {
-  height: 75px;
-
+  height: auto;
+  flex: auto;
 }
 
 .profile {
-  height: 75px;
-
+  height: auto;
+  flex: auto;
 }
 
 .user-buttons {
-  grid-area: h / i / j;
+  grid-area: j;
+  display: flex;
+  flex-direction: column;
+  max-height: 100px;
 }
