@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import '../ownJokes.css';
 
 function OwnJokes({ author }) {
@@ -26,6 +27,9 @@ function OwnJokes({ author }) {
     return <div id={jokeObject._id} key={jokeObject._id} className='jokeBox'>
       <h3>Setup: {jokeObject.setup}</h3>
       {jokeObject.punchline.length > 0 && <h3>Punchline: {jokeObject.punchline}</h3>}
+      <Link to={`/editjoke/${jokeObject._id}`} >
+        <button className='button'>EDIT</button>
+      </Link>
       <button className='button' onClick={handleDelete}>DELETE</button>
     </div>
   }
@@ -82,7 +86,7 @@ function OwnJokes({ author }) {
           </>
           :
           <p><button className='button' onClick={changeCreateStatus}>ADD</button>
-          <div>No jokes yet</div></p>
+            <div>No jokes yet</div></p>
       }
     </>
   )

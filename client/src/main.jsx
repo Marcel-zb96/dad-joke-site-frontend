@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import User from './components/User';
 import RandomJoke from './RandomJoke';
+import JokeEditor from './components/JokeEditor';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/ownJokes",
         element: <OwnJokes author={localStorage.getItem('user')} />
+      },
+      {
+        path: "/editjoke/:jokeId",
+        element: <JokeEditor />,
       },
       {
         path: "/home",
