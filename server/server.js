@@ -29,6 +29,7 @@ app.patch('/api/jokes/:id', async (req, res, next) => {
   try {
       const joke = await JokeModel.findById(req.params.id);
       joke.likes = req.body.likes;
+      joke.dislikes = req.body.dislikes;
       console.log(joke);
       await joke.save();
       res.send(joke).status(200)
@@ -71,9 +72,10 @@ app.post('/api/jokes/new', (req, res) => {
 app.get('/api/jokes', async (req, res) => {
   try {
     const type = req.query.type;
+    const sort = req.query.sort;
     const jokes = type === '' ?
       await JokeModel.find() :
-      await JokeModel.find({ type });
+      await JokeModel.find({ type }).sort({likes:sort});
     res.send(jokes).status(200)
   } catch (error) {
     console.log(err);

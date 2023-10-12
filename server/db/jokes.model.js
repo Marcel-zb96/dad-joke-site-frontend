@@ -8,6 +8,7 @@ const JokeSchema = new Schema({
   type: String,
   author: String,
   likes: Number,
+  dislikes: Number,
   created: {
     type: Date,
     default: Date.now,
