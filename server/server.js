@@ -14,14 +14,25 @@ if (!MONGO_URL) {
 const app = express();
 app.use(express.json());
 
+app.get('/api/jokeById/:jokeId', async (req, res) => {
+  const jokeId = req.params.jokeId;
+  const response = await JokeModel.findById(jokeId);
+  return res.json(response);
+});
+
+app.put('/api/jokes/:jokeId', async (req, res) => {
+  const jokeId = req.params.jokeId;
+  const response = await JokeModel.findByIdAndUpdate(jokeId, req.body);
+  res.json(response);
+});
+
 app.get('/api/jokes/:author', async (req, res) => {
-  console.log(req.params.author)
   const author = req.params.author;
   try {
     const data = await JokeModel.find({ author: author });
     res.send(data);
   } catch (err) {
-    res.status(555).send(console.error(err));
+    res.status(500).send(console.error(err));
   }
 });
 
@@ -29,7 +40,6 @@ app.patch('/api/jokes/:id', async (req, res, next) => {
   try {
       const joke = await JokeModel.findById(req.params.id);
       joke.likes = req.body.likes;
-      console.log(joke);
       await joke.save();
       res.send(joke).status(200)
   } catch (error) {
@@ -44,7 +54,7 @@ app.delete('/api/jokes/:id', async (req, res) => {
     await JokeModel.findOneAndDelete({ _id: id });
     res.status(200).send('Delete successful');
   } catch (err) {
-    res.status(333).send(console.error(err));
+    res.status(500).send(console.error(err));
   }
 });
 
@@ -65,7 +75,7 @@ app.post('/api/jokes/new', (req, res) => {
   });
   newJoke.save()
     .then((newJoke) => { res.status(200).send(newJoke) })
-    .catch((err) => { res.status(444).send(err) })
+    .catch((err) => { res.status(500).send(err) })
 });
 
 app.get('/api/jokes', async (req, res) => {
@@ -95,7 +105,6 @@ app.get('/api/user/:name', async (req, res) => {
 app.get('/api/user/:name/:email', async (req, res) => {
   const name = req.params.name;
   const email = req.params.email;
-  console.log(name, email);
   try {
     const user = await User.findOne({name: name, email: email});
     console.log(user);
