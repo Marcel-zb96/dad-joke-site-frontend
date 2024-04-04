@@ -10,8 +10,6 @@ export default function Joke({ joke }) {
     const [disableLike,setDisableLike] = useState(false)
     const [disLikeBtn,setDisLikeBtn] = useState(false)
 
-
-
     async function fetchByMethod(url, methodName, data) {
         const response = await fetch(url, {
             method: methodName,

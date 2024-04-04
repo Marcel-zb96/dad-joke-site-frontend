@@ -19,7 +19,7 @@ export default function RandomJoke() {
       {
         randomJoke ?
         <Joke joke={randomJoke} /> :
-        <div>Loading...</div> 
+        <div>valami</div> 
       }
     </>
   )
