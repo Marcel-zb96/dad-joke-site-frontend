@@ -1,0 +1,19 @@
+.joke-feed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

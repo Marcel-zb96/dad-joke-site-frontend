@@ -1,16 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import ReactDOM from 'react-dom/client';
+import './index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from './App.jsx';
-import OwnJokes from './components/OwnJokes.jsx';
-import JokesByType from './JokesByType';
-import Header from './components/Header';
-import Login from './components/Login';
-import User from './components/User';
-import RandomJoke from './RandomJoke';
-import JokeEditor from './components/JokeEditor';
+import App from './Pages/Home/Home.jsx'
+import OwnJokes from './Pages/MyJoke/OwnJokes.jsx';
+import JokeFeed from './Pages/JokeFeed/JokeFeed.jsx';
+import Header from './Components/Header/Header.jsx';
+import Login from './Pages/Login/Login.jsx';
+import User from './Pages/Profile/User.jsx';
+import RandomJoke from './Pages/RandomJoke/RandomJoke.jsx';
+import JokeEditor from './Pages/JokeEditor/JokeEditor.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,10 +20,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <App />,
-      },
-      {
-        path: "/user",
-        element: <User />
       },
       {
         path: "/ownJokes",
@@ -39,23 +35,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/general",
-        element: <JokesByType jokeType={'general'} />,
+        element: <JokeFeed jokeType={'general'} />,
       },
       {
         path: "/all",
-        element: <JokesByType jokeType={''} />,
+        element: <JokeFeed jokeType={''} />,
       },
       {
         path: "/Dad Jokes",
-        element: <JokesByType jokeType={'Dad Jokes'} />,
+        element: <JokeFeed jokeType={'Dad Jokes'} />,
       },
       {
         path: "/knock-knock",
-        element: <JokesByType jokeType={'knock-knock'} />,
+        element: <JokeFeed jokeType={'knock-knock'} />,
       },
       {
         path: "/programming",
-        element: <JokesByType jokeType={'programming'} />,
+        element: <JokeFeed jokeType={'programming'} />,
       }, 
       {
         path: "/login",

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "../editJoke.css";
+import "./editJoke.css";
 
 const JokeEditor = () => {
   const { jokeId } = useParams();

@@ -1,10 +1,3 @@
-#root {
-  margin: 0;
-  width: 100vw;
-  height: 100vh;
-  text-align: center;
-}
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -45,8 +38,10 @@
 }
 
 
-.types{
-  display: grid;
+.type-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
@@ -55,18 +50,41 @@
 }
 
 .type-box {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
   padding: 2px 16px;
   height: 50px;
   width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  line-height: 1;
+  text-decoration: none;
+  color: #333333;
+  font-size: 18px;
+  border-radius: 0px;
+  font-weight: bold;
+  border: 2px solid #333333;
+  transition: 0.3s;
+  box-shadow: 5px 5px 0px 0px rgb(114, 114, 114);
+  background-color: #ffffff;
 }
 
-.blured-pline{
-  filter: blur(5px);
+.type-box:hover {
+  color: #fff;
+  background-color: #686868;
+}
+
+.component-title {
+  margin-bottom: 35px;
+  color: white;
+  font-family: Impact, Haettenschweiler;
+  font-size: x-large;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-request{

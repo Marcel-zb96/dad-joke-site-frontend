@@ -5,7 +5,6 @@ import { Joke as JokeModel } from "./db/jokes.model.js";
 import User from './db/userData.js';
 
 const { MONGO_URL, PORT = 3000 } = process.env;
-
 if (!MONGO_URL) {
   console.error("Missing MONGO_URL environment variable");
   process.exit(1);
@@ -38,14 +37,13 @@ app.get('/api/jokes/:author', async (req, res) => {
 
 app.patch('/api/jokes/:id', async (req, res, next) => {
   try {
-      const joke = await JokeModel.findById(req.params.id);
-      joke.likes = req.body.likes;
-      joke.dislikes = req.body.dislikes;
-      console.log(joke);
-      await joke.save();
-      res.send(joke).status(200)
+    const joke = await JokeModel.findById(req.params.id);
+    joke.likes = req.body.likes;
+    joke.dislikes = req.body.dislikes;
+    await joke.save();
+    res.send(joke).status(200)
   } catch (error) {
-      next(error);
+    next(error);
   }
 })
 
@@ -83,21 +81,26 @@ app.post('/api/jokes/new', (req, res) => {
 app.get('/api/jokes', async (req, res) => {
   try {
     const type = req.query.type;
-    const sort = req.query.sort;
+    const sort = {};
+    if (req.query.sort !== "") {
+      sort[req.query.sort] = "desc";
+    };
+    console.log(sort);
     const jokes = type === '' ?
       await JokeModel.find() :
-      await JokeModel.find({ type }).sort({likes:sort});
+      await JokeModel.find({ type }).sort(sort);
+    console.log(jokes[0])
     res.send(jokes).status(200)
   } catch (error) {
     console.log(err);
   }
 })
 
-//user endpoint
+
 app.get('/api/user/:name', async (req, res) => {
   const name = req.params.name;
   try {
-    const user = await User.findOne({name: name});
+    const user = await User.findOne({ name: name });
     res.send(user);
   } catch (error) {
     console.error(error);
@@ -109,14 +112,14 @@ app.get('/api/user/:name/:email', async (req, res) => {
   const name = req.params.name;
   const email = req.params.email;
   try {
-    const user = await User.findOne({name: name, email: email});
+    const user = await User.findOne({ name: name, email: email });
     console.log(user);
     if (user) {
-      res.json({success: 'You are logged in'});
+      res.json({ success: 'You are logged in' });
     }
   } catch (error) {
     console.error(error);
-    res.json({success: 'User not extist, please register'});
+    res.json({ success: 'User not extist, please register' });
   }
 });
 
@@ -131,13 +134,13 @@ app.post('/api/user', async (req, res) => {
     email,
     createdAt
   });
-  
+
   try {
     await user.save();
-    res.status(201).json({success: 'User created'});
+    res.status(201).json({ success: 'User created' });
   } catch (error) {
     console.error(error);
-    res.json({success: 'Email or username already exists'})
+    res.json({ success: 'Email or username already exists' })
   }
 });
 
@@ -146,14 +149,14 @@ app.patch('/api/user', async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   try {
-    const targetUser = await User.findOne({name: targetName});
+    const targetUser = await User.findOne({ name: targetName });
     targetUser.name = name;
     targetUser.email = email;
     targetUser.save();
-    res.status(201).json({success: 'User data has been changed!'});
+    res.status(201).json({ success: 'User data has been changed!' });
   } catch (error) {
     console.error(error);
-    res.json({success: 'Process failed!'})
+    res.json({ success: 'Process failed!' })
   }
 });
 

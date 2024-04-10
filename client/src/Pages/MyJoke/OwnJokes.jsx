@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import '../ownJokes.css';
+import './ownJokes.css';
 
 function OwnJokes({ author }) {
   const [isCreatingJoke, setIsCreatingJoke] = useState(false);

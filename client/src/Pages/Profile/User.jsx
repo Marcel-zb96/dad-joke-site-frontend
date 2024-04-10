@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function User({userName}) {
-  console.log(userName);
+  
   async function sendRequest(url, payload, method) {
     try {
       const response = await fetch(url, {

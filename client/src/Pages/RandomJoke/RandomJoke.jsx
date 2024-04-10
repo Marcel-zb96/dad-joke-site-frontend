@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
-import Joke from "./Joke"
+import './RandomJoke.css';
+import Joke from "../../Components/Joke/Joke"
+import Loader from "../../Components/Loader/Loader";
 
 export default function RandomJoke() {
   const [randomJoke, setRandomJoke] = useState(null);
@@ -18,8 +20,10 @@ export default function RandomJoke() {
     <>
       {
         randomJoke ?
-        <Joke joke={randomJoke} /> :
-        <div>valami</div> 
+          <div className="feed-container">
+            <Joke joke={randomJoke} />
+          </div> :
+          <Loader />
       }
     </>
   )
