@@ -4,7 +4,7 @@ import Loader from '../../Components/Loader/Loader';
 import { Link } from 'react-router-dom';
 
 const fetchTypes = async () => {
-  const response = await fetch('/api/types');
+  const response = await fetch('/api/jokes/types');
   return await response.json();
 }
 

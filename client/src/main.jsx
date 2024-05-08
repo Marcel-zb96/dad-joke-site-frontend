@@ -4,13 +4,13 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from './Pages/Home/Home.jsx'
-import OwnJokes from './Pages/MyJoke/OwnJokes.jsx';
+import MyJokes from './Pages/MyJokes/MyJokes.jsx';
 import JokeFeed from './Pages/JokeFeed/JokeFeed.jsx';
 import Header from './Components/Header/Header.jsx';
 import Login from './Pages/Login/Login.jsx';
-import User from './Pages/Profile/User.jsx';
+import Profile from './Pages/Profile/Profile.jsx';
 import RandomJoke from './Pages/RandomJoke/RandomJoke.jsx';
-import JokeEditor from './Pages/JokeEditor/JokeEditor.jsx';
+import Register from './Pages/Register/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,12 +22,8 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/ownJokes",
-        element: <OwnJokes author={localStorage.getItem('user')} />
-      },
-      {
-        path: "/editjoke/:jokeId",
-        element: <JokeEditor />,
+        path: "/myjokes",
+        element: <MyJokes />
       },
       {
         path: "/home",
@@ -58,12 +54,16 @@ const router = createBrowserRouter([
         element: <Login/>
       },
       {
+        path: "/register",
+        element: <Register />
+      },
+      {
         path: "/random",
         element: <RandomJoke />
       },
       {
         path: "/profile",
-        element: <User userName={localStorage.getItem('user')}/>
+        element: <Profile />
       }
     ]
   }]

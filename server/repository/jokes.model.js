@@ -6,9 +6,8 @@ const JokeSchema = new Schema({
   setup: String,
   punchline: String,
   type: String,
-  author: String,
-  likes: Number,
-  dislikes: Number,
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
+  likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
   created: {
     type: Date,
     default: Date.now,

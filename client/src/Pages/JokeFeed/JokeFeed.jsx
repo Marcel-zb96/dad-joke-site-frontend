@@ -1,55 +1,56 @@
-import { Link } from "react-router-dom"
 import Joke from "../../Components/Joke/Joke"
 import './JokeFeed.css'
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import Loader from "../../Components/Loader/Loader"
 
 const fetchTypes = async () => {
-  const response = await fetch('/api/types');
+  const response = await fetch('/api/jokes/types', {
+    method: 'GET',
+    headers: { 'authorization': `Bearer ${sessionStorage.getItem('madJokeUser')}` }
+  });
+  return await response.json();
+}
+
+const fetchJokes = async (jokeType) => {
+  const response = await fetch(`/api/jokes?type=${jokeType}`, {
+    method: 'GET',
+    headers: { 'authorization': `Bearer ${sessionStorage.getItem('madJokeUser')}` }
+  });
   return await response.json();
 }
 
 const JokeFeed = ({ jokeType }) => {
-  const [jokes, setJokes] = useState([])
-  const [selectedSort, setSelectedSort] = useState("")
+  const [jokes, setJokes] = useState(null)
   const [types, setTypes] = useState(null);
-  const [filter, setFilter] = useState(jokeType);
 
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchJokes = async () => {
-      const response = await fetch(`/api/jokes?type=${jokeType}&sort=${selectedSort}`);
-      const data = await response.json();
-      setJokes(data)
-    }
-    const getTypes = async () => {
+    let ignore = false;
+    const getJokesAndTypes = async () => {
+      const data = await fetchJokes(jokeType);
       const allTypes = await fetchTypes();
       setTypes(allTypes);
+      setJokes(data);
     }
-    fetchJokes()
-    getTypes();
-  }, [selectedSort, filter])
+    if (!ignore) {
+      getJokesAndTypes();
+    }
+    return () => ignore = true;
+  }, [jokeType])
 
-  if (!types) return <Loader />
+  const handleTypeChange = (e) => {
+    setTypes(null);
+    navigate(`/${encodeURIComponent(e.target.value)}`);
+  };
+
+  if (!types || !jokes) return <Loader />
 
   return (
     <div className="main-container">
       <div className="filter-container">
-        <label>
-          Filter:
-          <select defaultValue={filter} onChange={e => setFilter(e.target.value)}>
-            <option value=""></option>
-            {types.map((type) => <option key={type} value={type}>{type}</option>)}
-          </select>
-        </label>
-        <label>
-          Sort by:
-          <select defaultValue={selectedSort} onChange={e => setSelectedSort(e.target.value)}>
-            <option value="likes">Like</option>
-            <option value="dislikes">Dislike</option>
-            <option value=""></option>
-          </select>
-        </label>
+        <div className="joketype-title"># {jokeType}</div>
         <hr />
       </div>
       <div className="joke-feed">
