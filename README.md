@@ -31,85 +31,17 @@
 
 ##  Overview
 
-This project was created for learning purposes. This project provides frontend for the mad joke site project.
+This project was created for learning purposes. This project provides frontend for the MAD-JOKE-SITE project.
 
 ---
 
 ##  Features
 
-    - Home page / post categories.
-    - Random post page.
-    - Signing: user sign up and logging in, using `bcrypt` for encrytion and `jasonwebtoken` for authentication.
-    - Posting: users can create new posts, edit and delete them.
-    - Like system: users can like posts that is saved in the joke database.
-
----
-
-##  Repository Structure
-
-```sh
-└── dad-joke-site-frontend/
-    ├── src
-    │   ├── Components
-    │   │   ├── Header
-    │   │   │   ├── Header.css
-    │   │   │   └── Header.jsx
-    │   │   ├── Joke
-    │   │   │   ├── Joke.css
-    │   │   │   └── Joke.jsx
-    │   │   ├── Loader
-    │   │   │   ├── Loader.css
-    │   │   │   └── Loader.jsx
-    │   │   ├── NewJokeForm
-    │   │   │   ├── NewJokeForm.css
-    │   │   │   └── NewJokeForm.jsx
-    │   │   ├── UserData
-    │   │   │   ├── PwChangeForm.jsx
-    │   │   │   ├── UserData.css
-    │   │   │   ├── UserData.jsx
-    │   │   │   └── UserDataForm.jsx
-    │   │   └── UserJoke
-    │   │       ├── DeletePopup
-    │   │       │   ├── DeletePopup.css
-    │   │       │   └── DeletePopup.jsx
-    │   │       ├── EditJoke
-    │   │       │   ├── EditJoke.css
-    │   │       │   └── EditJoke.jsx
-    │   │       ├── JokeOutline
-    │   │       │   ├── JokeOutline.css
-    │   │       │   └── JokeOutline.jsx
-    │   │       ├── UserJoke.css
-    │   │       └── UserJoke.jsx
-    │   ├── Pages
-    │   │   ├── Home
-    │   │   │   ├── Home.css
-    │   │   │   └── Home.jsx
-    │   │   ├── JokeFeed
-    │   │   │   ├── JokeFeed.css
-    │   │   │   └── JokeFeed.jsx
-    │   │   ├── Login
-    │   │   │   ├── Login.css
-    │   │   │   └── Login.jsx
-    │   │   ├── MyJokes
-    │   │   │   ├── MyJokes.css
-    │   │   │   └── MyJokes.jsx
-    │   │   ├── Profile
-    │   │   │   ├── Profile.css
-    │   │   │   └── Profile.jsx
-    │   │   ├── RandomJoke
-    │   │   │   ├── RandomJoke.css
-    │   │   │   └── RandomJoke.jsx
-    │   │   └── Register
-    │   │       ├── Register.css
-    │   │       └── Register.jsx
-    │   ├── index.css
-    │   └── main.jsx
-    ├── index.html
-    ├── README.md
-    ├── package-lock.json
-    ├── package.json
-    └── vite.config.js
-```
+- Home page / post categories.
+- Random post page.
+- Signing: user sign up and logging in, using `bcrypt` for encrytion and `jasonwebtoken` for authentication.
+- Posting: users can create new posts, edit and delete them.
+- Like system: users can like posts that is saved in the joke database.
 
 ---
 
